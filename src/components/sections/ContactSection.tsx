@@ -12,13 +12,14 @@ export function ContactSection() {
     >
       <div className="mx-auto max-w-2xl text-center">
         <FadeInOnScroll>
-          <SectionHeading title="Get In Touch" />
+          <SectionHeading title="Let's Talk" />
         </FadeInOnScroll>
 
         <FadeInOnScroll delay={0.2}>
           <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-            I&apos;m currently open to new opportunities. Whether you have a
-            project in mind or just want to connect, feel free to reach out.
+            I&apos;m looking for my next role in a product-driven team. If
+            you&apos;re building something meaningful and need a developer who
+            thinks beyond the code, I&apos;d like to hear about it.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-6">
@@ -36,7 +37,7 @@ export function ContactSection() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              Say Hello
+              Get in touch
             </Button>
             <SocialLinks />
           </div>
