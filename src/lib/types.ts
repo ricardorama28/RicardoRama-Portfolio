@@ -5,7 +5,10 @@ export interface NavItem {
 
 export interface Project {
   title: string;
-  description: string;
+  subtitle: string;
+  problem: string;
+  decision: string;
+  impact: string;
   tags: string[];
   github?: string;
   demo?: string;

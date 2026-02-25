@@ -9,8 +9,8 @@ export function ProjectsSection() {
       <div className="mx-auto max-w-6xl">
         <FadeInOnScroll>
           <SectionHeading
-            title="Projects"
-            subtitle="A selection of things I've built"
+            title="What I've Built"
+            subtitle="Real problems I spotted, and the tools I built to solve them"
           />
         </FadeInOnScroll>
 

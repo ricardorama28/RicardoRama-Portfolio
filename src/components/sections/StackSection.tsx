@@ -10,7 +10,7 @@ export function StackSection() {
         <FadeInOnScroll>
           <SectionHeading
             title="Tech Stack"
-            subtitle="Technologies I work with"
+            subtitle="What I actually use to build"
           />
         </FadeInOnScroll>
 

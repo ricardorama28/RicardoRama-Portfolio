@@ -10,22 +10,52 @@ interface ProjectCardProps {
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <motion.div
-      className="group rounded-2xl border border-slate-200 bg-white p-6 transition-colors dark:border-slate-800 dark:bg-gray-900"
+      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-colors dark:border-slate-800 dark:bg-gray-900"
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
-      {/* Decorative gradient bar */}
-      <div className="mb-4 h-1 w-12 rounded-full bg-gradient-to-r from-sky-500 to-cyan-400" />
+      {/* Header */}
+      <div className="mb-4">
+        <div className="mb-2 h-1 w-12 rounded-full bg-gradient-to-r from-sky-500 to-cyan-400" />
+        <h3 className="font-display text-xl font-bold text-slate-900 dark:text-slate-100">
+          {project.title}
+        </h3>
+        <p className="mt-1 text-sm font-medium text-sky-500 dark:text-sky-400">
+          {project.subtitle}
+        </p>
+      </div>
 
-      <h3 className="font-display text-xl font-bold text-slate-900 dark:text-slate-100">
-        {project.title}
-      </h3>
+      {/* Problem / Decision / Impact */}
+      <div className="flex-1 space-y-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            Problem
+          </p>
+          <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            {project.problem}
+          </p>
+        </div>
 
-      <p className="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-        {project.description}
-      </p>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            Key decision
+          </p>
+          <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            {project.decision}
+          </p>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            Impact
+          </p>
+          <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            {project.impact}
+          </p>
+        </div>
+      </div>
 
       {/* Tags */}
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-5 flex flex-wrap gap-2">
         {project.tags.map((tag) => (
           <span
             key={tag}
@@ -37,7 +67,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Links */}
-      <div className="mt-5 flex gap-3">
+      <div className="mt-4 flex gap-3">
         {project.github && (
           <a
             href={project.github}

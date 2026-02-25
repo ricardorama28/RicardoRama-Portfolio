@@ -5,13 +5,13 @@ import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ricardo Rama | Full Stack Developer",
+  title: "Ricardo Rama | Product-Oriented Developer",
   description:
-    "Full Stack Developer passionate about building elegant, performant web applications. Portfolio showcasing projects, skills, and experience.",
+    "I detect real problems and build solutions that work. React, TypeScript, Chrome Extensions, and product thinking applied to real-world software.",
   openGraph: {
-    title: "Ricardo Rama | Full Stack Developer",
+    title: "Ricardo Rama | Product-Oriented Developer",
     description:
-      "Full Stack Developer passionate about building elegant, performant web applications.",
+      "I detect real problems and build solutions that work. React, TypeScript, and product thinking applied to real-world software.",
     type: "website",
   },
 };

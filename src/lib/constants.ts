@@ -2,7 +2,7 @@ import type { NavItem } from "./types";
 
 export const siteConfig = {
   name: "Ricardo Rama",
-  role: "Full Stack Developer",
+  role: "I find real problems and build the solution.",
   email: "placeholder@email.com",
   github: "https://github.com",
   linkedin: "https://linkedin.com",
