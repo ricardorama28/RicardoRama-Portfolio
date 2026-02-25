@@ -7,89 +7,151 @@ import { Button } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
 /**
- * Spotlight Hero
+ * Spotlight Hero — lerp + breathing + intensity fade
  *
- * Two layers sit on top of the base content:
+ * Layers (bottom → top):
+ *   z-0   Ghost text    "RICARDO RAMA" at 5 % opacity, always faintly visible
+ *   z-10  Main content  name · headline · subtitle · CTA (clickable)
+ *   z-20  Blend layer   white + mix-blend-mode: difference (inverts colors)
+ *   z-30  Text layer    "RICARDO RAMA" at 15 % opacity (revealed inside spotlight)
  *
- * 1. Blend layer (z-20) — a solid-white div with `mix-blend-mode: difference`.
- *    Inside a radial mask that follows the cursor, white ⊕ difference inverts
- *    every color below it: white bg → black, dark text → white.
- *
- * 2. Text layer (z-30) — the giant "RICARDO RAMA" watermark, also masked to
- *    the same spotlight circle.  Because it sits *above* the blend layer it
- *    is not inverted by it; its own low-opacity white (or dark in dark-mode)
- *    is rendered directly on top of the already-inverted area.
- *
- * Both masks are updated via a single `requestAnimationFrame` callback so
- * the DOM is touched at most once per frame.  On mobile / non-pointer
- * devices the two layers are not rendered at all.
+ * The spotlight follows the cursor with a smooth trail (lerp), oscillates its
+ * radius (breathing), and fades in/out gradually via an intensity multiplier.
+ * The animation loop self-starts on pointerenter and self-terminates once
+ * intensity reaches ≈ 0 after pointerleave — no wasted frames when idle.
  */
 
-const RADIUS = 200;
+/* ── Tuning constants ── */
+const BASE_RADIUS = 200;
+const LERP_SPEED = 0.08; // position smoothing  (lower = more trail)
+const INTENSITY_SPEED = 0.06; // fade-in / fade-out speed
+const BREATH_AMP = 12; // ±px radius oscillation
+const BREATH_PERIOD = 1000; // ms per sine cycle
 
-function mask(x: number, y: number) {
-  return `radial-gradient(circle ${RADIUS}px at ${x}px ${y}px, black 0%, black 40%, transparent 100%)`;
+function mask(x: number, y: number, r: number) {
+  return `radial-gradient(circle ${r}px at ${x}px ${y}px, black 0%, black 40%, transparent 100%)`;
 }
 
-const OFF = mask(-1000, -1000);
+const INITIAL_MASK = mask(0, 0, 0);
 
 export function HeroSection() {
   const blendRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const pos = useRef({ x: -1000, y: -1000 });
-  const raf = useRef(0);
+
+  /* Animation state — all in refs to avoid re-renders */
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const intensityTarget = useRef(0);
+  const intensity = useRef(0);
+  const loopId = useRef(0);
+
   const [isDesktop, setIsDesktop] = useState(false);
 
-  /* ── Detect desktop with fine pointer ── */
+  /* ── Detect desktop + fine pointer + no reduced-motion ── */
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px) and (pointer: fine)");
+    const mq = window.matchMedia(
+      "(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+    );
     const sync = () => setIsDesktop(mq.matches);
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  /* ── Paint both masks in one rAF ── */
-  const paint = useCallback(() => {
-    const m = mask(pos.current.x, pos.current.y);
-    [blendRef.current, textRef.current].forEach((el) => {
-      if (!el) return;
-      el.style.maskImage = m;
-      el.style.webkitMaskImage = m;
-    });
-    raf.current = 0;
+  /* ── Core animation loop ── */
+  const tick = useCallback(() => {
+    // Lerp position toward target
+    current.current.x += (target.current.x - current.current.x) * LERP_SPEED;
+    current.current.y += (target.current.y - current.current.y) * LERP_SPEED;
+
+    // Lerp intensity toward its target
+    intensity.current +=
+      (intensityTarget.current - intensity.current) * INTENSITY_SPEED;
+
+    // Breathing: subtle radius oscillation
+    const breath =
+      Math.sin(performance.now() / BREATH_PERIOD) * BREATH_AMP;
+
+    // Final radius
+    const r = Math.max(0, (BASE_RADIUS + breath) * intensity.current);
+
+    // Apply mask to both layers
+    const m = mask(current.current.x, current.current.y, r);
+    const blend = blendRef.current;
+    const text = textRef.current;
+    if (blend) {
+      blend.style.maskImage = m;
+      blend.style.webkitMaskImage = m;
+    }
+    if (text) {
+      text.style.maskImage = m;
+      text.style.webkitMaskImage = m;
+    }
+
+    // Self-terminate when fully faded out
+    if (intensityTarget.current === 0 && intensity.current < 0.001) {
+      intensity.current = 0;
+      loopId.current = 0;
+      return;
+    }
+
+    loopId.current = requestAnimationFrame(tick);
   }, []);
 
-  const onPointerMove = useCallback(
+  /* ── Pointer handlers ── */
+  const onPointerEnter = useCallback(
     (e: PointerEvent) => {
       const rect = sectionRef.current?.getBoundingClientRect();
       if (!rect) return;
-      pos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      if (!raf.current) raf.current = requestAnimationFrame(paint);
+
+      // Snap both current and target so the spotlight appears at entry point
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      target.current = { x, y };
+      current.current = { x, y };
+
+      intensityTarget.current = 1;
+
+      // Start loop if not already running
+      if (!loopId.current) {
+        loopId.current = requestAnimationFrame(tick);
+      }
     },
-    [paint],
+    [tick],
   );
 
-  const onPointerLeave = useCallback(() => {
-    pos.current = { x: -1000, y: -1000 };
-    paint();
-  }, [paint]);
+  const onPointerMove = useCallback((e: PointerEvent) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    target.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }, []);
 
+  const onPointerLeave = useCallback(() => {
+    // Don't kill the loop — let it fade out gracefully
+    intensityTarget.current = 0;
+  }, []);
+
+  /* ── Bind / unbind events ── */
   useEffect(() => {
     if (!isDesktop) return;
     const el = sectionRef.current;
     if (!el) return;
 
+    el.addEventListener("pointerenter", onPointerEnter);
     el.addEventListener("pointermove", onPointerMove);
     el.addEventListener("pointerleave", onPointerLeave);
 
     return () => {
+      el.removeEventListener("pointerenter", onPointerEnter);
       el.removeEventListener("pointermove", onPointerMove);
       el.removeEventListener("pointerleave", onPointerLeave);
-      if (raf.current) cancelAnimationFrame(raf.current);
+      if (loopId.current) {
+        cancelAnimationFrame(loopId.current);
+        loopId.current = 0;
+      }
     };
-  }, [isDesktop, onPointerMove, onPointerLeave]);
+  }, [isDesktop, onPointerEnter, onPointerMove, onPointerLeave]);
 
   return (
     <section
@@ -164,8 +226,8 @@ export function HeroSection() {
             style={{
               mixBlendMode: "difference",
               willChange: "mask-image",
-              maskImage: OFF,
-              WebkitMaskImage: OFF,
+              maskImage: INITIAL_MASK,
+              WebkitMaskImage: INITIAL_MASK,
             }}
           />
 
@@ -175,8 +237,8 @@ export function HeroSection() {
             className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center"
             style={{
               willChange: "mask-image",
-              maskImage: OFF,
-              WebkitMaskImage: OFF,
+              maskImage: INITIAL_MASK,
+              WebkitMaskImage: INITIAL_MASK,
             }}
             aria-hidden="true"
           >
