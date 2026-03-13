@@ -11,7 +11,7 @@ export const projects: Project[] = [
     impact:
       "Turns a frustrating 30-minute search into a clean, trustworthy experience. Users see only real listings that match their criteria.",
     tags: ["Chrome Extension APIs", "TypeScript", "DOM Manipulation"],
-    github: "#",
+    github: "https://github.com/ricardorama28/AutoFiltro-Extension",
   },
   {
     title: "QuiroLog",
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     impact:
       "A surgeon can open the app between procedures and log a surgery in under 30 seconds, with all data available offline and exportable.",
     tags: ["React", "TypeScript", "IndexedDB", "Dexie", "Vite"],
-    github: "#",
+    github: "https://github.com/ricardorama28/QuiroLog",
   },
   {
     title: "Explorador de Playas UY",
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     impact:
       "Users can find the right beach in seconds instead of searching across scattered blog posts and outdated government pages.",
     tags: ["React", "TypeScript", "Maps", "Geolocation", "Tailwind CSS"],
-    github: "#",
+    github: "https://github.com/ricardorama28/explorador-playas-uy",
     demo: "#",
   },
 ];
