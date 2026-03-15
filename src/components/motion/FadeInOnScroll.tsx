@@ -24,7 +24,7 @@ export function FadeInOnScroll({
       className={className}
       initial={prefersReduced ? false : { opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>

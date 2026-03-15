@@ -5,7 +5,7 @@ import { projects } from "@/data/projects";
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="bg-slate-50 px-6 py-24 dark:bg-gray-900">
+    <section id="projects" className="bg-cream-dark px-6 py-32 dark:bg-warm-dark-alt">
       <div className="mx-auto max-w-6xl">
         <FadeInOnScroll>
           <SectionHeading
@@ -14,7 +14,7 @@ export function ProjectsSection() {
           />
         </FadeInOnScroll>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <FadeInOnScroll key={project.title} delay={index * 0.1}>
               <ProjectCard project={project} />
