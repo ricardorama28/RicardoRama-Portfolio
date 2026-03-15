@@ -12,9 +12,9 @@ export function TechBadge({ item }: TechBadgeProps) {
     <motion.div
       className="flex items-center gap-3 rounded-xl border border-stone-200 bg-cream px-4 py-3 dark:border-stone-800 dark:bg-warm-dark-alt"
       whileHover={{
-        scale: 1.05,
-        borderColor: "rgb(168 162 158)",
-        transition: { duration: 0.2 },
+        scale: 1.03,
+        borderColor: "rgb(217 119 6 / 0.4)",
+        transition: { duration: 0.25 },
       }}
     >
       <span className="text-xl">{item.icon}</span>

@@ -11,9 +11,7 @@ export function ContactSection() {
       className="bg-cream-dark px-6 py-32 dark:bg-warm-dark-alt"
     >
       <div className="mx-auto max-w-2xl text-center">
-        <FadeInOnScroll>
-          <SectionHeading title="Let's Talk" />
-        </FadeInOnScroll>
+        <SectionHeading title="Let's Talk" />
 
         <FadeInOnScroll delay={0.2}>
           <p className="text-lg leading-relaxed text-stone-600 dark:text-stone-400">
