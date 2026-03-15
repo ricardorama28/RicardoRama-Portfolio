@@ -157,14 +157,14 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen overflow-hidden bg-white dark:bg-gray-950"
+      className="relative min-h-screen overflow-hidden bg-cream dark:bg-warm-dark"
     >
       {/* Ghost text — barely visible outside the spotlight */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden="true"
       >
-        <span className="font-display select-none text-center text-[18vw] font-black uppercase leading-[0.85] tracking-tighter text-slate-900/5 dark:text-white/5">
+        <span className="font-display select-none text-center text-[18vw] font-black uppercase leading-[0.85] tracking-tighter text-stone-900/5 dark:text-white/5">
           RICARDO
           <br />
           RAMA
@@ -175,38 +175,38 @@ export function HeroSection() {
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
         <div className="max-w-3xl text-center">
           <motion.p
-            className="text-sm font-medium uppercase tracking-widest text-sky-500 dark:text-sky-400"
+            className="text-sm font-medium uppercase tracking-widest text-amber-600 dark:text-amber-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
           >
             {siteConfig.name}
           </motion.p>
 
           <motion.h1
-            className="font-display mt-4 text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-slate-100"
+            className="font-display mt-6 text-4xl font-bold leading-tight tracking-tight text-stone-900 sm:text-5xl md:text-6xl dark:text-stone-100"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+            transition={{ duration: 1.0, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             {siteConfig.role}
           </motion.h1>
 
           <motion.p
-            className="mt-6 text-lg leading-relaxed text-slate-500 sm:text-xl dark:text-slate-400"
+            className="mt-8 text-lg leading-relaxed text-stone-500 sm:text-xl dark:text-stone-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 1.0, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             React + TypeScript developer focused on product logic, UX decisions,
             and shipping tools that people actually use.
           </motion.p>
 
           <motion.div
-            className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+            className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
+            transition={{ duration: 1.0, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <Button href="#projects" variant="primary">
               See what I&apos;ve built
@@ -242,7 +242,7 @@ export function HeroSection() {
             }}
             aria-hidden="true"
           >
-            <span className="font-display select-none text-center text-[18vw] font-black uppercase leading-[0.85] tracking-tighter text-white/15 dark:text-gray-950/15">
+            <span className="font-display select-none text-center text-[18vw] font-black uppercase leading-[0.85] tracking-tighter text-white/15 dark:text-stone-950/15">
               RICARDO
               <br />
               RAMA
@@ -259,11 +259,11 @@ export function HeroSection() {
         transition={{ delay: 1.2, duration: 1 }}
       >
         <motion.div
-          className="h-10 w-6 rounded-full border-2 border-slate-300 p-1 dark:border-slate-600"
+          className="h-10 w-6 rounded-full border-2 border-stone-300 p-1 dark:border-stone-600"
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="h-2 w-full rounded-full bg-slate-400 dark:bg-slate-500" />
+          <div className="h-2 w-full rounded-full bg-stone-400 dark:bg-stone-500" />
         </motion.div>
       </motion.div>
     </section>

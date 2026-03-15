@@ -5,7 +5,7 @@ import { techStack } from "@/data/stack";
 
 export function StackSection() {
   return (
-    <section id="stack" className="px-6 py-24">
+    <section id="stack" className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
         <FadeInOnScroll>
           <SectionHeading
@@ -18,7 +18,7 @@ export function StackSection() {
           {techStack.map((category, catIndex) => (
             <FadeInOnScroll key={category.title} delay={catIndex * 0.15}>
               <div>
-                <h3 className="mb-4 font-display text-lg font-semibold text-slate-900 dark:text-slate-100">
+                <h3 className="mb-4 font-display text-sm font-semibold uppercase tracking-wider text-stone-900 dark:text-stone-100">
                   {category.title}
                 </h3>
                 <div className="grid gap-3">

@@ -15,7 +15,7 @@ export function SocialLinks({ className }: SocialLinksProps) {
         href={siteConfig.github}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ede8df] text-stone-700 transition-colors hover:bg-stone-200 dark:bg-[#2a2520] dark:text-stone-300 dark:hover:bg-stone-800"
         whileHover={{ scale: 1.1, y: -2 }}
         whileTap={{ scale: 0.95 }}
         aria-label="GitHub"
@@ -30,7 +30,7 @@ export function SocialLinks({ className }: SocialLinksProps) {
         href={siteConfig.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ede8df] text-stone-700 transition-colors hover:bg-stone-200 dark:bg-[#2a2520] dark:text-stone-300 dark:hover:bg-stone-800"
         whileHover={{ scale: 1.1, y: -2 }}
         whileTap={{ scale: 0.95 }}
         aria-label="LinkedIn"

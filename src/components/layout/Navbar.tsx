@@ -27,7 +27,7 @@ export function Navbar() {
     <nav
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 shadow-sm backdrop-blur-md dark:bg-gray-950/80"
+          ? "bg-cream/80 shadow-sm backdrop-blur-md dark:bg-warm-dark/80"
           : "bg-transparent"
       }`}
     >
@@ -39,7 +39,7 @@ export function Navbar() {
             e.preventDefault();
             handleNavClick("#hero");
           }}
-          className="font-display text-lg font-bold text-slate-900 dark:text-slate-100"
+          className="font-display text-lg font-bold text-stone-900 dark:text-stone-100"
         >
           {siteConfig.name}
         </a>
@@ -54,7 +54,7 @@ export function Navbar() {
                 e.preventDefault();
                 handleNavClick(item.href);
               }}
-              className="text-sm font-medium text-slate-600 transition-colors hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400"
+              className="text-sm font-medium text-stone-600 transition-colors hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
             >
               {item.label}
             </a>
@@ -67,7 +67,7 @@ export function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#ede8df] dark:bg-[#2a2520]"
             aria-label="Toggle menu"
           >
             <svg
@@ -102,7 +102,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-slate-200 bg-white/95 backdrop-blur-md md:hidden dark:border-slate-800 dark:bg-gray-950/95"
+            className="overflow-hidden border-t border-stone-200 bg-cream/95 backdrop-blur-md md:hidden dark:border-stone-800 dark:bg-warm-dark/95"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {navItems.map((item) => (
@@ -113,7 +113,7 @@ export function Navbar() {
                     e.preventDefault();
                     handleNavClick(item.href);
                   }}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-sky-500 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-400"
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-stone-600 transition-colors hover:bg-[#ede8df] hover:text-amber-600 dark:text-stone-400 dark:hover:bg-[#2a2520] dark:hover:text-amber-400"
                 >
                   {item.label}
                 </a>
