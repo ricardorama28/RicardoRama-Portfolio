@@ -3,20 +3,21 @@ import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
 
 export function AboutSection() {
   return (
-    <section id="about" className="px-6 py-24">
+    <section id="about" className="px-6 py-32">
       <div className="mx-auto max-w-3xl">
         <FadeInOnScroll>
           <SectionHeading title="How I Work" />
         </FadeInOnScroll>
 
         <FadeInOnScroll delay={0.2}>
-          <div className="space-y-6 text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-            <p>
-              I start from the problem, not the technology. Before writing a
-              single line of code, I need to understand who has the problem, why
-              current solutions fail, and what the simplest path to a working
-              product looks like.
-            </p>
+          <p className="mb-8 border-l-2 border-stone-300 pl-6 font-display text-xl italic leading-relaxed text-stone-700 dark:border-stone-600 dark:text-stone-300">
+            I start from the problem, not the technology. Before writing a
+            single line of code, I need to understand who has the problem, why
+            current solutions fail, and what the simplest path to a working
+            product looks like.
+          </p>
+
+          <div className="space-y-6 text-lg leading-relaxed text-stone-600 dark:text-stone-400">
             <p>
               I build with React and TypeScript because they let me move fast
               without sacrificing reliability. I care about the details that

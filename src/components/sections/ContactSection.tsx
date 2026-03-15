@@ -8,7 +8,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-slate-50 px-6 py-24 dark:bg-gray-900"
+      className="bg-cream-dark px-6 py-32 dark:bg-warm-dark-alt"
     >
       <div className="mx-auto max-w-2xl text-center">
         <FadeInOnScroll>
@@ -16,7 +16,7 @@ export function ContactSection() {
         </FadeInOnScroll>
 
         <FadeInOnScroll delay={0.2}>
-          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          <p className="text-lg leading-relaxed text-stone-600 dark:text-stone-400">
             I&apos;m looking for my next role in a product-driven team. If
             you&apos;re building something meaningful and need a developer who
             thinks beyond the code, I&apos;d like to hear about it.

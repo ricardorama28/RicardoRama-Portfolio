@@ -19,13 +19,13 @@ export function Button({
   download,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors";
+    "inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium transition-colors";
 
   const variants = {
     primary:
-      "bg-sky-500 text-white hover:bg-sky-600 dark:bg-sky-400 dark:text-gray-950 dark:hover:bg-sky-300",
+      "bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-400 dark:text-[#1a1714] dark:hover:bg-amber-300",
     secondary:
-      "border border-slate-300 bg-transparent text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800",
+      "border border-stone-300 bg-transparent text-stone-700 hover:bg-[#ede8df] dark:border-stone-700 dark:text-stone-300 dark:hover:bg-[#2a2520]",
   };
 
   const combinedStyles = `${baseStyles} ${variants[variant]} ${className ?? ""}`;
@@ -36,7 +36,7 @@ export function Button({
         href={href}
         className={combinedStyles}
         download={download}
-        whileHover={{ scale: 1.03 }}
+        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.97 }}
       >
         {children}
@@ -47,7 +47,7 @@ export function Button({
   return (
     <motion.button
       className={combinedStyles}
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.97 }}
     >
       {children}
