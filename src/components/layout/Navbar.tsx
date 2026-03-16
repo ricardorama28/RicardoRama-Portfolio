@@ -16,7 +16,6 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [frame, setFrame] = useState(0);
 
-  /* ── Scroll progress → film reel counter ── */
   const { scrollYProgress } = useScroll();
   const frameNumber = useTransform(scrollYProgress, [0, 1], [0, 99]);
   useMotionValueEvent(frameNumber, "change", (v) =>
@@ -46,7 +45,7 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        {/* Logo / Name + Frame counter */}
+        {/* Logo / Name + Floor counter */}
         <div className="flex items-center">
           <a
             href="#hero"
@@ -54,14 +53,14 @@ export function Navbar() {
               e.preventDefault();
               handleNavClick("#hero");
             }}
-            className="font-display text-lg font-bold text-stone-900 dark:text-stone-100"
+            className="font-display text-lg font-bold text-gbh-plum dark:text-stone-100"
           >
             {siteConfig.name}
           </a>
           <span
             className={`ml-2 font-mono text-xs transition-opacity duration-300 ${
               scrolled
-                ? "text-stone-400 opacity-100 dark:text-stone-600"
+                ? "text-gbh-rose/60 opacity-100 dark:text-gbh-rose-light/60"
                 : "opacity-0"
             }`}
           >
@@ -79,11 +78,10 @@ export function Navbar() {
                 e.preventDefault();
                 handleNavClick(item.href);
               }}
-              className="group relative text-sm font-medium text-stone-600 transition-colors hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+              className="group relative text-sm font-medium text-gbh-plum-light transition-colors hover:text-gbh-rose dark:text-stone-400 dark:hover:text-gbh-rose-light"
             >
               {item.label}
-              {/* Animated underline — draws left-to-right */}
-              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-amber-600 transition-transform duration-300 group-hover:scale-x-100 dark:bg-amber-400" />
+              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-gbh-rose transition-transform duration-300 group-hover:scale-x-100 dark:bg-gbh-rose-light" />
             </a>
           ))}
           <ThemeToggle />
@@ -94,7 +92,7 @@ export function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#ede8df] dark:bg-[#2a2520]"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-gbh-rose/10 dark:bg-gbh-rose-light/10"
             aria-label="Toggle menu"
           >
             <svg
@@ -122,9 +120,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Scroll progress bar */}
+      {/* Scroll progress bar — rose accent */}
       <motion.div
-        className="h-px origin-left bg-amber-600/30 dark:bg-amber-400/20"
+        className="h-px origin-left bg-gbh-rose/30 dark:bg-gbh-rose-light/20"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -135,7 +133,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-stone-200 bg-cream/95 backdrop-blur-md md:hidden dark:border-stone-800 dark:bg-warm-dark/95"
+            className="overflow-hidden border-t border-gbh-rose/20 bg-cream/95 backdrop-blur-md md:hidden dark:border-gbh-rose-light/20 dark:bg-warm-dark/95"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {navItems.map((item) => (
@@ -146,7 +144,7 @@ export function Navbar() {
                     e.preventDefault();
                     handleNavClick(item.href);
                   }}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-stone-600 transition-colors hover:bg-[#ede8df] hover:text-amber-600 dark:text-stone-400 dark:hover:bg-[#2a2520] dark:hover:text-amber-400"
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-gbh-plum-light transition-colors hover:bg-gbh-rose/10 hover:text-gbh-rose dark:text-stone-400 dark:hover:bg-gbh-rose-light/10 dark:hover:text-gbh-rose-light"
                 >
                   {item.label}
                 </a>

@@ -4,14 +4,25 @@
 /* Enable class-based dark mode for next-themes */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom theme tokens */
+/* Custom theme tokens — Grand Budapest Hotel palette */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --color-cream: #faf7f2;
-  --color-cream-dark: #f5f0e8;
-  --color-warm-dark: #1a1714;
-  --color-warm-dark-alt: #221f1a;
+  /* Light mode surfaces */
+  --color-cream: #f8ece4;
+  --color-cream-dark: #f0ddd3;
+  /* Dark mode surfaces */
+  --color-warm-dark: #2a1f2e;
+  --color-warm-dark-alt: #362a3c;
+  /* GBH signature rose/pink */
+  --color-gbh-rose: #c4567a;
+  --color-gbh-rose-light: #d4789a;
+  /* Brass/gold accent */
+  --color-gbh-gold: #c5a55a;
+  --color-gbh-gold-light: #d4b96a;
+  /* Deep plum for text */
+  --color-gbh-plum: #4a2040;
+  --color-gbh-plum-light: #6b3a5c;
 }
 
 /* Smooth scrolling */
@@ -21,19 +32,19 @@ html {
 
 /* Base body styles */
 body {
-  @apply bg-cream text-stone-900 dark:bg-warm-dark dark:text-stone-100;
+  @apply bg-cream text-gbh-plum dark:bg-warm-dark dark:text-stone-100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Film grain overlay — barely perceptible atmospheric texture */
+/* Subtle vintage paper texture overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.02;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
