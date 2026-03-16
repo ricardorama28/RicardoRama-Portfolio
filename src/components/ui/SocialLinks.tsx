@@ -10,13 +10,12 @@ interface SocialLinksProps {
 export function SocialLinks({ className }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className ?? ""}`}>
-      {/* GitHub */}
       <motion.a
         href={siteConfig.github}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gbh-rose/10 text-gbh-plum transition-colors hover:bg-gbh-rose/20 dark:bg-gbh-rose-light/10 dark:text-stone-300 dark:hover:bg-gbh-rose-light/20"
-        whileHover={{ scale: 1.1, y: -2 }}
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-wes-pink/15 text-ink transition-colors hover:bg-wes-pink/30 dark:bg-wes-pink/10 dark:text-stone-300 dark:hover:bg-wes-pink/20"
+        whileHover={{ scale: 1.15, y: -3, rotate: 5 }}
         whileTap={{ scale: 0.95 }}
         aria-label="GitHub"
       >
@@ -25,13 +24,12 @@ export function SocialLinks({ className }: SocialLinksProps) {
         </svg>
       </motion.a>
 
-      {/* LinkedIn */}
       <motion.a
         href={siteConfig.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gbh-rose/10 text-gbh-plum transition-colors hover:bg-gbh-rose/20 dark:bg-gbh-rose-light/10 dark:text-stone-300 dark:hover:bg-gbh-rose-light/20"
-        whileHover={{ scale: 1.1, y: -2 }}
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-wes-sky/15 text-ink transition-colors hover:bg-wes-sky/30 dark:bg-wes-sky/10 dark:text-stone-300 dark:hover:bg-wes-sky/20"
+        whileHover={{ scale: 1.15, y: -3, rotate: -5 }}
         whileTap={{ scale: 0.95 }}
         aria-label="LinkedIn"
       >

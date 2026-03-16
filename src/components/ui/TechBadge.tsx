@@ -10,15 +10,16 @@ interface TechBadgeProps {
 export function TechBadge({ item }: TechBadgeProps) {
   return (
     <motion.div
-      className="flex items-center gap-3 rounded-xl border border-gbh-rose/20 bg-cream px-4 py-3 dark:border-gbh-rose-light/20 dark:bg-warm-dark-alt"
+      className="flex items-center gap-3 rounded-lg border border-wes-sky/20 bg-white/60 px-4 py-3 dark:border-wes-sky/10 dark:bg-warm-dark/60"
       whileHover={{
-        scale: 1.03,
-        borderColor: "rgb(196 86 122 / 0.4)",
-        transition: { duration: 0.25 },
+        scale: 1.04,
+        y: -2,
+        borderColor: "rgb(240 139 179 / 0.5)",
+        transition: { duration: 0.2 },
       }}
     >
       <span className="text-xl">{item.icon}</span>
-      <span className="text-sm font-medium text-gbh-plum dark:text-stone-300">
+      <span className="text-sm font-medium text-ink dark:text-stone-300">
         {item.name}
       </span>
     </motion.div>

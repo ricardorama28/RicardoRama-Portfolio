@@ -4,9 +4,30 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 
 /**
- * Art Deco Divider — Grand Budapest Hotel style
- * Replaces film perforations with a symmetrical ornamental separator.
+ * Geometric Pastel Divider — Wes Anderson style
+ * Symmetrical color blocks and shapes that animate on scroll.
  */
+
+const BLOCK_COLORS = [
+  "bg-wes-pink/30",
+  "bg-wes-sky/30",
+  "bg-wes-yellow/30",
+  "bg-wes-mint/30",
+  "bg-wes-coral/30",
+  "bg-wes-lavender/30",
+  "bg-wes-peach/30",
+];
+
+const DARK_BLOCK_COLORS = [
+  "dark:bg-wes-pink/15",
+  "dark:bg-wes-sky/15",
+  "dark:bg-wes-yellow/15",
+  "dark:bg-wes-mint/15",
+  "dark:bg-wes-coral/15",
+  "dark:bg-wes-lavender/15",
+  "dark:bg-wes-peach/15",
+];
+
 export function FilmPerforation() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
@@ -14,64 +35,44 @@ export function FilmPerforation() {
   const show = prefersReduced || isInView;
 
   return (
-    <div ref={ref} className="relative py-8">
-      <div className="mx-auto flex max-w-sm items-center justify-center gap-3">
-        {/* Left rule */}
-        <motion.div
-          className="h-px flex-1 origin-right bg-gbh-gold/30 dark:bg-gbh-gold-light/20"
-          initial={prefersReduced ? false : { scaleX: 0 }}
-          animate={show ? { scaleX: 1 } : undefined}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        />
+    <div ref={ref} className="relative py-6">
+      <div className="mx-auto flex max-w-md items-center justify-center gap-1.5">
+        {/* Animated color blocks */}
+        {BLOCK_COLORS.map((color, i) => (
+          <motion.div
+            key={i}
+            className={`h-2 rounded-sm ${color} ${DARK_BLOCK_COLORS[i]}`}
+            style={{ flex: i === 3 ? 2 : 1 }}
+            initial={prefersReduced ? false : { scaleX: 0 }}
+            animate={show ? { scaleX: 1 } : undefined}
+            transition={{
+              duration: 0.4,
+              delay: i * 0.05,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          />
+        ))}
+      </div>
 
-        {/* Art deco diamond ornaments */}
-        <motion.span
-          className="text-[10px] text-gbh-gold/50 dark:text-gbh-gold-light/40"
-          initial={prefersReduced ? false : { opacity: 0, scale: 0 }}
-          animate={show ? { opacity: 1, scale: 1 } : undefined}
-          transition={{ delay: 0.1, duration: 0.3 }}
-        >
-          &#9830;
-        </motion.span>
-        <motion.span
-          className="text-xs text-gbh-rose/40 dark:text-gbh-rose-light/30"
-          initial={prefersReduced ? false : { opacity: 0, scale: 0 }}
-          animate={show ? { opacity: 1, scale: 1 } : undefined}
-          transition={{ delay: 0.15, duration: 0.3 }}
-        >
-          &#9830;
-        </motion.span>
-        <motion.span
-          className="text-sm text-gbh-gold/60 dark:text-gbh-gold-light/40"
-          initial={prefersReduced ? false : { opacity: 0, scale: 0 }}
-          animate={show ? { opacity: 1, scale: 1 } : undefined}
-          transition={{ delay: 0.2, duration: 0.3 }}
-        >
-          &#9830;
-        </motion.span>
-        <motion.span
-          className="text-xs text-gbh-rose/40 dark:text-gbh-rose-light/30"
-          initial={prefersReduced ? false : { opacity: 0, scale: 0 }}
-          animate={show ? { opacity: 1, scale: 1 } : undefined}
-          transition={{ delay: 0.25, duration: 0.3 }}
-        >
-          &#9830;
-        </motion.span>
-        <motion.span
-          className="text-[10px] text-gbh-gold/50 dark:text-gbh-gold-light/40"
-          initial={prefersReduced ? false : { opacity: 0, scale: 0 }}
-          animate={show ? { opacity: 1, scale: 1 } : undefined}
+      {/* Center geometric accent */}
+      <div className="mt-2 flex items-center justify-center gap-2">
+        <motion.div
+          className="h-1.5 w-1.5 rotate-45 bg-wes-coral/30 dark:bg-wes-coral/15"
+          initial={prefersReduced ? false : { scale: 0 }}
+          animate={show ? { scale: 1 } : undefined}
           transition={{ delay: 0.3, duration: 0.3 }}
-        >
-          &#9830;
-        </motion.span>
-
-        {/* Right rule */}
+        />
         <motion.div
-          className="h-px flex-1 origin-left bg-gbh-gold/30 dark:bg-gbh-gold-light/20"
-          initial={prefersReduced ? false : { scaleX: 0 }}
-          animate={show ? { scaleX: 1 } : undefined}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="h-1 w-1 rounded-full bg-wes-sky/30 dark:bg-wes-sky/15"
+          initial={prefersReduced ? false : { scale: 0 }}
+          animate={show ? { scale: 1 } : undefined}
+          transition={{ delay: 0.35, duration: 0.3 }}
+        />
+        <motion.div
+          className="h-1.5 w-1.5 rotate-45 bg-wes-coral/30 dark:bg-wes-coral/15"
+          initial={prefersReduced ? false : { scale: 0 }}
+          animate={show ? { scale: 1 } : undefined}
+          transition={{ delay: 0.4, duration: 0.3 }}
         />
       </div>
     </div>

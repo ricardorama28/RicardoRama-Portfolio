@@ -1,65 +1,119 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap');
 @import "tailwindcss";
 
-/* Enable class-based dark mode for next-themes */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom theme tokens — Grand Budapest Hotel palette */
+/* ── Wes Anderson Pastel Palette ── */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  /* Light mode surfaces */
-  --color-cream: #f8ece4;
-  --color-cream-dark: #f0ddd3;
-  /* Dark mode surfaces */
-  --color-warm-dark: #2a1f2e;
-  --color-warm-dark-alt: #362a3c;
-  /* GBH signature rose/pink */
-  --color-gbh-rose: #c4567a;
-  --color-gbh-rose-light: #d4789a;
-  /* Brass/gold accent */
-  --color-gbh-gold: #c5a55a;
-  --color-gbh-gold-light: #d4b96a;
-  /* Deep plum for text */
-  --color-gbh-plum: #4a2040;
-  --color-gbh-plum-light: #6b3a5c;
+  /* Pastel primaries */
+  --color-wes-pink: #f08bb3;
+  --color-wes-coral: #ff6b6b;
+  --color-wes-mint: #a8e6cf;
+  --color-wes-yellow: #ffe66d;
+  --color-wes-sky: #79c7ff;
+  --color-wes-lavender: #cdb4db;
+  --color-wes-peach: #ffb7a5;
+  /* Surfaces – light */
+  --color-cream: #fef9f4;
+  --color-cream-dark: #fdf0e6;
+  /* Surfaces – dark */
+  --color-warm-dark: #1e1e2e;
+  --color-warm-dark-alt: #282838;
+  /* Text */
+  --color-ink: #2b2b3a;
+  --color-ink-light: #5a5a72;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Base body styles */
 body {
-  @apply bg-cream text-gbh-plum dark:bg-warm-dark dark:text-stone-100;
+  @apply bg-cream text-ink dark:bg-warm-dark dark:text-stone-100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle vintage paper texture overlay */
+/* Subtle paper noise */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
 }
 
 @media (max-width: 767px) {
-  body::before {
-    display: none;
-  }
+  body::before { display: none; }
 }
 
-/* Floating animation for hero name */
+/* ── Checkerboard pattern (applied via class) ── */
+.checkerboard-bg {
+  background-image:
+    linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0,0,0,0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.03) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+}
+
+:is(.dark) .checkerboard-bg {
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+}
+
+/* ── Stripe pattern ── */
+.stripes-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(0,0,0,0.02) 10px,
+    rgba(0,0,0,0.02) 20px
+  );
+}
+
+:is(.dark) .stripes-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.02) 10px,
+    rgba(255,255,255,0.02) 20px
+  );
+}
+
+/* Geometric heading block */
+.heading-block {
+  @apply relative inline-block px-8 py-3;
+}
+
+.heading-block::before {
+  content: "";
+  @apply absolute inset-0 -z-10 rounded-sm;
+}
+
+/* Float animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Reduced motion */
@@ -72,8 +126,5 @@ body::before {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
-  body::before {
-    display: none;
-  }
+  body::before { display: none; }
 }
