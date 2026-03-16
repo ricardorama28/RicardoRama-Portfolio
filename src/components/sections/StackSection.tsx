@@ -7,12 +7,10 @@ export function StackSection() {
   return (
     <section id="stack" className="px-6 py-32">
       <div className="mx-auto max-w-6xl">
-        <FadeInOnScroll>
-          <SectionHeading
-            title="Tech Stack"
-            subtitle="What I actually use to build"
-          />
-        </FadeInOnScroll>
+        <SectionHeading
+          title="Tech Stack"
+          subtitle="What I actually use to build"
+        />
 
         <div className="grid gap-12 md:grid-cols-3">
           {techStack.map((category, catIndex) => (

@@ -1,22 +1,58 @@
+"use client";
+
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
 
 export function AboutSection() {
+  const quoteRef = useRef(null);
+  const quoteInView = useInView(quoteRef, { once: true, margin: "-60px" });
+  const prefersReduced = useReducedMotion();
+  const showQuote = prefersReduced || quoteInView;
+
+  // Split pull-quote into lines for staggered editorial reveal
+  const quoteLines = [
+    "I start from the problem, not the technology.",
+    "Before writing a single line of code, I need to understand",
+    "who has the problem, why current solutions fail, and what",
+    "the simplest path to a working product looks like.",
+  ];
+
   return (
     <section id="about" className="px-6 py-32">
       <div className="mx-auto max-w-3xl">
-        <FadeInOnScroll>
-          <SectionHeading title="How I Work" />
-        </FadeInOnScroll>
+        <SectionHeading title="How I Work" chapter="I" />
+
+        {/* Editorial pull-quote — line-by-line fade-up reveal */}
+        <div ref={quoteRef} className="relative mb-8 pl-6">
+          {/* Animated border that draws downward */}
+          <motion.div
+            className="absolute top-0 left-0 w-0.5 origin-top bg-stone-300 dark:bg-stone-600"
+            initial={prefersReduced ? { height: "100%" } : { height: 0 }}
+            animate={showQuote ? { height: "100%" } : undefined}
+            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          {quoteLines.map((line, i) => (
+            <motion.span
+              key={i}
+              className="font-display block text-xl italic leading-relaxed text-stone-700 dark:text-stone-300"
+              initial={prefersReduced ? false : { opacity: 0, y: 12 }}
+              animate={showQuote ? { opacity: 1, y: 0 } : undefined}
+              transition={{
+                duration: 0.7,
+                delay: 0.2 + i * 0.12,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {line}
+              {i < quoteLines.length - 1 ? " " : ""}
+            </motion.span>
+          ))}
+        </div>
 
         <FadeInOnScroll delay={0.2}>
-          <p className="mb-8 border-l-2 border-stone-300 pl-6 font-display text-xl italic leading-relaxed text-stone-700 dark:border-stone-600 dark:text-stone-300">
-            I start from the problem, not the technology. Before writing a
-            single line of code, I need to understand who has the problem, why
-            current solutions fail, and what the simplest path to a working
-            product looks like.
-          </p>
-
           <div className="space-y-6 text-lg leading-relaxed text-stone-600 dark:text-stone-400">
             <p>
               I build with React and TypeScript because they let me move fast

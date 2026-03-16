@@ -1,13 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 import { siteConfig, navItems } from "@/lib/constants";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [frame, setFrame] = useState(0);
+
+  /* ── Scroll progress → film reel counter ── */
+  const { scrollYProgress } = useScroll();
+  const frameNumber = useTransform(scrollYProgress, [0, 1], [0, 99]);
+  useMotionValueEvent(frameNumber, "change", (v) =>
+    setFrame(Math.round(v)),
+  );
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -32,17 +46,28 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        {/* Logo / Name */}
-        <a
-          href="#hero"
-          onClick={(e) => {
-            e.preventDefault();
-            handleNavClick("#hero");
-          }}
-          className="font-display text-lg font-bold text-stone-900 dark:text-stone-100"
-        >
-          {siteConfig.name}
-        </a>
+        {/* Logo / Name + Frame counter */}
+        <div className="flex items-center">
+          <a
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick("#hero");
+            }}
+            className="font-display text-lg font-bold text-stone-900 dark:text-stone-100"
+          >
+            {siteConfig.name}
+          </a>
+          <span
+            className={`ml-2 font-mono text-xs transition-opacity duration-300 ${
+              scrolled
+                ? "text-stone-400 opacity-100 dark:text-stone-600"
+                : "opacity-0"
+            }`}
+          >
+            ({String(frame).padStart(2, "0")})
+          </span>
+        </div>
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
@@ -54,9 +79,11 @@ export function Navbar() {
                 e.preventDefault();
                 handleNavClick(item.href);
               }}
-              className="text-sm font-medium text-stone-600 transition-colors hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+              className="group relative text-sm font-medium text-stone-600 transition-colors hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
             >
               {item.label}
+              {/* Animated underline — draws left-to-right */}
+              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-amber-600 transition-transform duration-300 group-hover:scale-x-100 dark:bg-amber-400" />
             </a>
           ))}
           <ThemeToggle />
@@ -94,6 +121,12 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Scroll progress bar */}
+      <motion.div
+        className="h-px origin-left bg-amber-600/30 dark:bg-amber-400/20"
+        style={{ scaleX: scrollYProgress }}
+      />
 
       {/* Mobile menu */}
       <AnimatePresence>
