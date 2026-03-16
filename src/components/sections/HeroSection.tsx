@@ -7,18 +7,11 @@ import { Button } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 
 /**
- * Spotlight Hero with Curtain Reveal
+ * Grand Budapest Hotel Hero
  *
- * Entrance: Two cream-colored curtain panels cover the viewport and part
- * outward over ~1.2s with a dramatic ease, revealing the hero beneath.
- * After curtains clear, content staggers in with cinematic timing.
- *
- * Spotlight layers (bottom → top):
- *   z-0   Ghost text    "RICARDO RAMA" at 5% opacity
- *   z-10  Main content  name · headline · subtitle · CTA
- *   z-20  Blend layer   white + mix-blend-mode: difference
- *   z-30  Text layer    "RICARDO RAMA" at 15% opacity (revealed inside spotlight)
- *   z-40  Curtains      cream panels that part on mount (removed after animation)
+ * Entrance: Two rose-colored curtain panels cover the viewport and part
+ * outward, revealing a symmetrical hotel-lobby composition beneath.
+ * Spotlight follows mouse on desktop with brass-tinted glow.
  */
 
 /* ── Spotlight tuning constants ── */
@@ -37,7 +30,7 @@ const INITIAL_MASK = mask(0, 0, 0);
 /* ── Curtain animation config ── */
 const CURTAIN_EASE: [number, number, number, number] = [0.76, 0, 0.24, 1];
 const CURTAIN_DURATION = 1.2;
-const CONTENT_BASE_DELAY = 0.6; // content starts after curtain begins moving
+const CONTENT_BASE_DELAY = 0.6;
 
 export function HeroSection() {
   const blendRef = useRef<HTMLDivElement>(null);
@@ -54,7 +47,6 @@ export function HeroSection() {
   const [curtainDone, setCurtainDone] = useState(false);
   const prefersReduced = useReducedMotion();
 
-  /* ── Detect desktop + fine pointer ── */
   useEffect(() => {
     const mq = window.matchMedia(
       "(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
@@ -65,7 +57,6 @@ export function HeroSection() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  /* ── Core spotlight animation loop ── */
   const tick = useCallback(() => {
     current.current.x += (target.current.x - current.current.x) * LERP_SPEED;
     current.current.y += (target.current.y - current.current.y) * LERP_SPEED;
@@ -96,7 +87,6 @@ export function HeroSection() {
     loopId.current = requestAnimationFrame(tick);
   }, []);
 
-  /* ── Pointer handlers ── */
   const onPointerEnter = useCallback(
     (e: PointerEvent) => {
       const rect = sectionRef.current?.getBoundingClientRect();
@@ -123,7 +113,6 @@ export function HeroSection() {
     intensityTarget.current = 0;
   }, []);
 
-  /* ── Bind / unbind events ── */
   useEffect(() => {
     if (!isDesktop) return;
     const el = sectionRef.current;
@@ -144,7 +133,6 @@ export function HeroSection() {
     };
   }, [isDesktop, onPointerEnter, onPointerMove, onPointerLeave]);
 
-  /* ── Stagger delays for content (after curtain starts moving) ── */
   const d = prefersReduced ? 0 : CONTENT_BASE_DELAY;
 
   return (
@@ -158,7 +146,7 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden="true"
       >
-        <span className="font-display select-none text-center text-[18vw] font-black uppercase leading-[0.85] tracking-tighter text-stone-900/5 dark:text-white/5">
+        <span className="font-display select-none text-center text-[18vw] font-black uppercase leading-[0.85] tracking-tighter text-gbh-rose/5 dark:text-gbh-rose-light/5">
           RICARDO
           <br />
           RAMA
@@ -168,9 +156,9 @@ export function HeroSection() {
       {/* ── Main content ── */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
         <div className="max-w-3xl text-center">
-          {/* Name label */}
+          {/* Hotel-style room number / name label */}
           <motion.p
-            className="text-sm font-medium uppercase tracking-widest text-amber-600 dark:text-amber-400"
+            className="text-sm font-medium uppercase tracking-[0.3em] text-gbh-rose dark:text-gbh-rose-light"
             initial={prefersReduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, delay: d, ease: [0.22, 1, 0.36, 1] }}
@@ -178,23 +166,23 @@ export function HeroSection() {
             {siteConfig.name}
           </motion.p>
 
-          {/* Decorative ornament */}
+          {/* Art deco ornamental divider */}
           <motion.div
             className="mx-auto mt-4 flex items-center justify-center gap-3"
             initial={prefersReduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: d + 0.15 }}
           >
-            <div className="h-px w-8 bg-amber-600/40 dark:bg-amber-400/30" />
-            <span className="text-xs text-amber-600/60 dark:text-amber-400/50">
-              ✦
+            <div className="h-px w-12 bg-gbh-gold/40 dark:bg-gbh-gold-light/30" />
+            <span className="text-xs text-gbh-gold dark:text-gbh-gold-light">
+              &#9830;
             </span>
-            <div className="h-px w-8 bg-amber-600/40 dark:bg-amber-400/30" />
+            <div className="h-px w-12 bg-gbh-gold/40 dark:bg-gbh-gold-light/30" />
           </motion.div>
 
           {/* Headline */}
           <motion.h1
-            className="font-display mt-6 text-4xl font-bold leading-tight tracking-tight text-stone-900 sm:text-5xl md:text-6xl dark:text-stone-100"
+            className="font-display mt-6 text-4xl font-bold leading-tight tracking-tight text-gbh-plum sm:text-5xl md:text-6xl dark:text-stone-100"
             initial={prefersReduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -208,7 +196,7 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <motion.p
-            className="mt-8 text-lg leading-relaxed text-stone-500 sm:text-xl dark:text-stone-400"
+            className="mt-8 text-lg leading-relaxed text-gbh-plum-light sm:text-xl dark:text-stone-400"
             initial={prefersReduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -272,13 +260,13 @@ export function HeroSection() {
         </>
       )}
 
-      {/* ── Curtain reveal panels ── */}
+      {/* ── Curtain reveal panels — GBH rose-tinted ── */}
       <AnimatePresence>
         {!curtainDone && !prefersReduced && (
           <>
             {/* Left curtain */}
             <motion.div
-              className="absolute inset-0 z-40 bg-cream-dark dark:bg-warm-dark-alt"
+              className="absolute inset-0 z-40 bg-gbh-rose dark:bg-warm-dark-alt"
               style={{ clipPath: "inset(0 50% 0 0)" }}
               initial={{ x: "0%" }}
               animate={{ x: "-100%" }}
@@ -293,7 +281,7 @@ export function HeroSection() {
             />
             {/* Right curtain */}
             <motion.div
-              className="absolute inset-0 z-40 bg-cream-dark dark:bg-warm-dark-alt"
+              className="absolute inset-0 z-40 bg-gbh-rose dark:bg-warm-dark-alt"
               style={{ clipPath: "inset(0 0 0 50%)" }}
               initial={{ x: "0%" }}
               animate={{ x: "100%" }}
@@ -307,9 +295,9 @@ export function HeroSection() {
               }}
               onAnimationComplete={() => setCurtainDone(true)}
             />
-            {/* Center seam line */}
+            {/* Center seam line — gold */}
             <motion.div
-              className="absolute top-0 bottom-0 left-1/2 z-40 w-px -translate-x-1/2 bg-stone-300 dark:bg-stone-700"
+              className="absolute top-0 bottom-0 left-1/2 z-40 w-px -translate-x-1/2 bg-gbh-gold/60 dark:bg-stone-700"
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
               transition={{ duration: 0.4, delay: 0.25 }}
@@ -326,11 +314,11 @@ export function HeroSection() {
         transition={{ delay: prefersReduced ? 0 : d + 1.0, duration: 1 }}
       >
         <motion.div
-          className="h-10 w-6 rounded-full border-2 border-stone-300 p-1 dark:border-stone-600"
+          className="h-10 w-6 rounded-full border-2 border-gbh-rose/30 p-1 dark:border-gbh-rose-light/30"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="h-2 w-full rounded-full bg-stone-400 dark:bg-stone-500" />
+          <div className="h-2 w-full rounded-full bg-gbh-rose/50 dark:bg-gbh-rose-light/50" />
         </motion.div>
       </motion.div>
     </section>

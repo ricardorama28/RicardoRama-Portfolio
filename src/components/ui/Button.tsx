@@ -23,9 +23,9 @@ export function Button({
 
   const variants = {
     primary:
-      "bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-400 dark:text-[#1a1714] dark:hover:bg-amber-300",
+      "bg-gbh-rose text-white hover:bg-gbh-rose/90 dark:bg-gbh-rose-light dark:text-[#2a1f2e] dark:hover:bg-gbh-rose-light/90",
     secondary:
-      "border border-stone-300 bg-transparent text-stone-700 hover:bg-[#ede8df] dark:border-stone-700 dark:text-stone-300 dark:hover:bg-[#2a2520]",
+      "border border-gbh-rose/30 bg-transparent text-gbh-plum hover:bg-gbh-rose/10 dark:border-gbh-rose-light/30 dark:text-stone-300 dark:hover:bg-gbh-rose-light/10",
   };
 
   const combinedStyles = `${baseStyles} ${variants[variant]} ${className ?? ""}`;

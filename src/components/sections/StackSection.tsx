@@ -16,7 +16,7 @@ export function StackSection() {
           {techStack.map((category, catIndex) => (
             <FadeInOnScroll key={category.title} delay={catIndex * 0.15}>
               <div>
-                <h3 className="mb-4 font-display text-sm font-semibold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                <h3 className="mb-4 font-display text-sm font-semibold uppercase tracking-wider text-gbh-plum dark:text-stone-100">
                   {category.title}
                 </h3>
                 <div className="grid gap-3">

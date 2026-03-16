@@ -27,7 +27,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <motion.div
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-cream p-8 dark:border-stone-800 dark:bg-warm-dark-alt"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-gbh-rose/20 bg-cream p-8 dark:border-gbh-rose-light/20 dark:bg-warm-dark-alt"
       whileHover={isDesktop ? { y: -6 } : undefined}
       transition={{ duration: 0.3 }}
       onHoverStart={() => isDesktop && setHovered(true)}
@@ -36,15 +36,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         isDesktop
           ? {
               boxShadow: hovered
-                ? "0 20px 40px -12px rgba(0,0,0,0.15)"
+                ? "0 20px 40px -12px rgba(196,86,122,0.15)"
                 : "0 0 0 0 transparent",
               transition: "box-shadow 0.4s ease",
             }
           : undefined
       }
     >
-      {/* Scene number — top right */}
-      <span className="absolute top-4 right-4 font-display text-xs text-stone-300 dark:text-stone-700">
+      {/* Room number — top right */}
+      <span className="absolute top-4 right-4 font-display text-xs text-gbh-rose/30 dark:text-gbh-rose-light/30">
         {sceneNumber}
       </span>
 
@@ -56,11 +56,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       >
         {/* Header */}
         <div className="mb-6">
-          <div className="mb-2 h-px w-12 bg-amber-600/40 dark:bg-amber-400/30" />
-          <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100">
+          <div className="mb-2 h-px w-12 bg-gbh-rose/40 dark:bg-gbh-rose-light/30" />
+          <h3 className="font-display text-xl font-bold text-gbh-plum dark:text-stone-100">
             {project.title}
           </h3>
-          <p className="mt-1 text-sm font-medium text-stone-500 dark:text-stone-400">
+          <p className="mt-1 text-sm font-medium text-gbh-plum-light dark:text-stone-400">
             {project.subtitle}
           </p>
         </div>
@@ -68,26 +68,26 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         {/* Problem / Decision / Impact */}
         <div className="flex-1 space-y-5">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-400 dark:text-stone-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gbh-rose/60 dark:text-gbh-rose-light/60">
               Problem
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+            <p className="mt-1 text-sm leading-relaxed text-gbh-plum-light dark:text-stone-400">
               {project.problem}
             </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-400 dark:text-stone-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gbh-rose/60 dark:text-gbh-rose-light/60">
               Key decision
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+            <p className="mt-1 text-sm leading-relaxed text-gbh-plum-light dark:text-stone-400">
               {project.decision}
             </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-400 dark:text-stone-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gbh-rose/60 dark:text-gbh-rose-light/60">
               Impact
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+            <p className="mt-1 text-sm leading-relaxed text-gbh-plum-light dark:text-stone-400">
               {project.impact}
             </p>
           </div>
@@ -98,7 +98,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-[#ede8df] px-3 py-1 text-xs font-medium text-stone-600 dark:bg-[#2a2520] dark:text-stone-400"
+              className="rounded-full bg-gbh-rose/10 px-3 py-1 text-xs font-medium text-gbh-plum-light dark:bg-gbh-rose-light/10 dark:text-stone-400"
             >
               {tag}
             </span>
@@ -112,7 +112,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-stone-500 transition-colors hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+              className="text-sm font-medium text-gbh-plum-light transition-colors hover:text-gbh-rose dark:text-stone-400 dark:hover:text-gbh-rose-light"
             >
               GitHub &rarr;
             </a>
@@ -122,7 +122,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-stone-500 transition-colors hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+              className="text-sm font-medium text-gbh-plum-light transition-colors hover:text-gbh-rose dark:text-stone-400 dark:hover:text-gbh-rose-light"
             >
               Live Demo &rarr;
             </a>
@@ -130,29 +130,31 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
       </motion.div>
 
-      {/* ── Film title card overlay (desktop hover only) ── */}
+      {/* ── Grand Budapest title card overlay (desktop hover only) ── */}
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#1a1714]/90 p-6 dark:bg-cream/90"
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gbh-plum/90 p-6 dark:bg-cream/90"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Frame-within-frame border — Wes Anderson signature */}
-            <div className="absolute inset-3 rounded-lg border border-stone-500/20 dark:border-stone-400/20" />
+            {/* Wes Anderson frame-within-frame border */}
+            <div className="absolute inset-3 rounded-lg border border-gbh-gold/30 dark:border-gbh-gold/20" />
 
-            {/* Film perforations — top */}
-            <div className="absolute top-0 right-0 left-0 flex justify-center gap-2 py-2">
-              {Array.from({ length: 7 }).map((_, i) => (
-                <motion.div
+            {/* Art deco ornaments — top */}
+            <div className="absolute top-0 right-0 left-0 flex justify-center gap-2 py-3">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <motion.span
                   key={i}
-                  className="h-1.5 w-2.5 rounded-sm bg-stone-500/20 dark:bg-stone-400/20"
+                  className="text-[8px] text-gbh-gold/30 dark:text-gbh-gold/20"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.05 + i * 0.02, duration: 0.2 }}
-                />
+                >
+                  &#9830;
+                </motion.span>
               ))}
             </div>
 
@@ -167,13 +169,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="h-px w-6 bg-amber-400/60" />
-              <span className="text-[10px] text-amber-400/50">✦</span>
-              <div className="h-px w-6 bg-amber-400/60" />
+              <div className="h-px w-6 bg-gbh-gold/60" />
+              <span className="text-[10px] text-gbh-gold/50">&#9830;</span>
+              <div className="h-px w-6 bg-gbh-gold/60" />
             </motion.div>
 
             <motion.h3
-              className="font-display mt-3 text-center text-2xl font-bold text-cream dark:text-stone-900"
+              className="font-display mt-3 text-center text-2xl font-bold text-cream dark:text-gbh-plum"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.4 }}
@@ -182,7 +184,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             </motion.h3>
 
             <motion.p
-              className="mt-2 text-xs font-medium uppercase tracking-widest text-stone-400 dark:text-stone-600"
+              className="mt-2 text-xs font-medium uppercase tracking-widest text-gbh-rose-light/80 dark:text-gbh-plum-light"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.25, duration: 0.3 }}
@@ -200,9 +202,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="h-px w-6 bg-amber-400/60" />
-              <span className="text-[10px] text-amber-400/50">✦</span>
-              <div className="h-px w-6 bg-amber-400/60" />
+              <div className="h-px w-6 bg-gbh-gold/60" />
+              <span className="text-[10px] text-gbh-gold/50">&#9830;</span>
+              <div className="h-px w-6 bg-gbh-gold/60" />
             </motion.div>
 
             {/* Overlay links */}
@@ -217,7 +219,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-medium text-stone-400 transition-colors hover:text-amber-400 dark:text-stone-500 dark:hover:text-amber-600"
+                  className="text-xs font-medium text-gbh-rose-light/80 transition-colors hover:text-gbh-gold dark:text-gbh-plum-light dark:hover:text-gbh-rose"
                 >
                   GitHub &rarr;
                 </a>
@@ -227,23 +229,25 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-medium text-stone-400 transition-colors hover:text-amber-400 dark:text-stone-500 dark:hover:text-amber-600"
+                  className="text-xs font-medium text-gbh-rose-light/80 transition-colors hover:text-gbh-gold dark:text-gbh-plum-light dark:hover:text-gbh-rose"
                 >
                   Live Demo &rarr;
                 </a>
               )}
             </motion.div>
 
-            {/* Film perforations — bottom */}
-            <div className="absolute right-0 bottom-0 left-0 flex justify-center gap-2 py-2">
-              {Array.from({ length: 7 }).map((_, i) => (
-                <motion.div
+            {/* Art deco ornaments — bottom */}
+            <div className="absolute right-0 bottom-0 left-0 flex justify-center gap-2 py-3">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <motion.span
                   key={i}
-                  className="h-1.5 w-2.5 rounded-sm bg-stone-500/20 dark:bg-stone-400/20"
+                  className="text-[8px] text-gbh-gold/30 dark:text-gbh-gold/20"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.05 + i * 0.02, duration: 0.2 }}
-                />
+                >
+                  &#9830;
+                </motion.span>
               ))}
             </div>
           </motion.div>
